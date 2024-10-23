@@ -14,21 +14,21 @@ import reactor.core.publisher.Mono;
 public class UserAuthenticationServiceImpl implements UserAuthenticationService {
     private final JwtUtil jwtUtil;
     private final RepositoryUserAccess repositoryUserAccess;
-    public UserAuthenticationServiceImpl(JwtUtil jwtUtil, RepositoryUserAccess repositoryUserAccess){
+
+    public UserAuthenticationServiceImpl(JwtUtil jwtUtil, RepositoryUserAccess repositoryUserAccess) {
         this.jwtUtil = jwtUtil;
-        this.repositoryUserAccess =repositoryUserAccess;
+        this.repositoryUserAccess = repositoryUserAccess;
     }
 
     /**
-     *
      * @param userCredentials Represents the UserCredentials request
      * @return a new UserAccess instance including the authentication token
      */
     @Override
     public Mono<UserAccess> authenticateAndGenerateToken(UserCredentials userCredentials) {
-        return repositoryUserAccess.validateUserCredentials(userCredentials).map(validatedCredentials->{
+        return repositoryUserAccess.validateUserCredentials(userCredentials).map(validatedUser -> {
             String token = jwtUtil.generateToken(userCredentials);
-            return  new UserAccess(token,validatedCredentials);
+            return new UserAccess(token, validatedUser);
         });
 
     }

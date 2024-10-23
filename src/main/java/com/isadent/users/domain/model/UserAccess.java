@@ -10,10 +10,10 @@ import lombok.Getter;
 @Getter
 public class UserAccess {
     private final String authToken;
-    private final UserCredentials userCredentials;
+    private final ValidatedUser validatedUser;
 
-    public UserAccess(String authToken, UserCredentials userCredentials){
-        this.userCredentials= userCredentials;
+    public UserAccess(String authToken, ValidatedUser validatedUser){
+        this.validatedUser= validatedUser;
         this.authToken= authToken;
     }
 }

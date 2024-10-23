@@ -2,6 +2,7 @@ package com.isadent.users.infrastructure.persistance;
 
 
 import com.isadent.users.domain.model.UserCredentials;
+import com.isadent.users.domain.model.ValidatedUser;
 import com.isadent.users.domain.repository.RepositoryUserAccess;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,14 +33,16 @@ public class RepositoryUserAccessImpl implements RepositoryUserAccess {
      * @return a UserCredentials object for token creation
      */
     @Override
-    public Mono<UserCredentials> validateUserCredentials(UserCredentials userCredentials) {
+    public Mono<ValidatedUser> validateUserCredentials(UserCredentials userCredentials) {
 
         String userKey = "user:" + userCredentials.getEmail();
         Mono<String> password = hashOperations.get(userKey, "password");
         return password.switchIfEmpty(Mono.error(new BadCredentialsException("User not found")))
                 .flatMap(stored -> {
                     if (passwordEncoder.matches(userCredentials.getPassword(), stored)) {
-                        return Mono.just(userCredentials);
+                        return Mono.just(new ValidatedUser(userCredentials.getEmail(),
+                                userCredentials.getUsername()
+                        ));
                     } else {
                         return Mono.error(new BadCredentialsException("Invalid email or password"));
                     }

@@ -14,13 +14,13 @@ import reactor.core.publisher.Mono;
 public class RepositorySaveUserAccessImpl implements RepositorySaveUserAccess {
     private final PasswordEncoder passwordEncoder;
     private final ReactiveHashOperations<String, String, String> hashOperations;
-    public RepositorySaveUserAccessImpl(PasswordEncoder passwordEncoder,ReactiveHashOperations<String, String, String> hashOperations){
+
+    public RepositorySaveUserAccessImpl(PasswordEncoder passwordEncoder, ReactiveHashOperations<String, String, String> hashOperations) {
         this.passwordEncoder = passwordEncoder;
         this.hashOperations = hashOperations;
     }
 
     /**
-     *
      * @param userCredentials represents the request to create a new user
      * @return saves the user in the redis db
      */
@@ -30,12 +30,13 @@ public class RepositorySaveUserAccessImpl implements RepositorySaveUserAccess {
 
         return hashOperations.get(userKey, "email")
                 .hasElement()
-                .flatMap(exists ->{
+                .flatMap(exists -> {
                     if (!exists) {
                         String password = passwordEncoder.encode(userCredentials.getPassword());
-                        return hashOperations.put(userKey, "email",userCredentials.getEmail())
-                                .then(hashOperations.put(userKey,"password",password));
-                    }else{
+                        return hashOperations.put(userKey, "email", userCredentials.getEmail())
+                                .then(hashOperations.put(userKey, "password", password))
+                                .then(hashOperations.put(userKey, "username", userCredentials.getUsername()));
+                    } else {
                         return Mono.error(new Exception("User already exists"));
                     }
                 })

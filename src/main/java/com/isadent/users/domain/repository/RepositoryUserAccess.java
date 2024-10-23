@@ -1,6 +1,7 @@
 package com.isadent.users.domain.repository;
 
 import com.isadent.users.domain.model.UserCredentials;
+import com.isadent.users.domain.model.ValidatedUser;
 import reactor.core.publisher.Mono;
 
 /**
@@ -8,5 +9,5 @@ import reactor.core.publisher.Mono;
  */
 public interface RepositoryUserAccess {
 
-    Mono <UserCredentials> validateUserCredentials(UserCredentials userCredentials);
+    Mono<ValidatedUser> validateUserCredentials(UserCredentials userCredentials);
 }

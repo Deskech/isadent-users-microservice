@@ -36,3 +36,4 @@ build/
 *.env
 pom.xml
 application.properties
+src/main/java/com/isadent/users/infrastructure/configuration

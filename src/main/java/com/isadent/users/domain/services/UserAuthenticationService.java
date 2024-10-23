@@ -6,5 +6,5 @@ import reactor.core.publisher.Mono;
 
 public interface UserAuthenticationService {
 
-   Mono <UserAccess> authenticateAndGenerateToken(UserCredentials userCredentials);
+    Mono<UserAccess> authenticateAndGenerateToken(UserCredentials userCredentials);
 }

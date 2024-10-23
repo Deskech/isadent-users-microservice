@@ -12,8 +12,8 @@ public class UserAccess {
     private final String authToken;
     private final ValidatedUser validatedUser;
 
-    public UserAccess(String authToken, ValidatedUser validatedUser){
-        this.validatedUser= validatedUser;
-        this.authToken= authToken;
+    public UserAccess(String authToken, ValidatedUser validatedUser) {
+        this.validatedUser = validatedUser;
+        this.authToken = authToken;
     }
 }

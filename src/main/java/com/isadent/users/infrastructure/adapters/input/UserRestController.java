@@ -5,9 +5,10 @@ import com.isadent.users.application.services.AuthenticateUser;
 import com.isadent.users.application.services.RegisterUser;
 import com.isadent.users.domain.model.UserAccess;
 import com.isadent.users.domain.model.UserCredentials;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 
 /**
@@ -35,11 +36,6 @@ public class UserRestController {
     public Mono<Void> save(@RequestBody UserCredentials userCredentials) {
 
         return registerUser.saveUser(userCredentials);
-    }
-
-    @GetMapping("/users")
-    public CsrfToken getCsrfToken(HttpServletRequest request) {
-        return (CsrfToken) request.getAttribute(CsrfToken.class.getName());
     }
 
 }

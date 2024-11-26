@@ -35,7 +35,9 @@ public class RepositorySaveUserAccessImpl implements RepositorySaveUserAccess {
                         String password = passwordEncoder.encode(userCredentials.getPassword());
                         return hashOperations.put(userKey, "email", userCredentials.getEmail())
                                 .then(hashOperations.put(userKey, "password", password))
-                                .then(hashOperations.put(userKey, "username", userCredentials.getUsername()));
+                                .then(hashOperations.put(userKey, "username", userCredentials.getUsername()))
+                                .then(hashOperations.put(userKey,"isVerified","false"));
+
                     } else {
                         return Mono.error(new Exception("User already exists"));
                     }

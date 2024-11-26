@@ -3,7 +3,7 @@ package com.isadent.users.infrastructure.services;
 import com.isadent.users.domain.model.UserAccess;
 import com.isadent.users.domain.model.UserCredentials;
 import com.isadent.users.domain.repository.RepositoryUserAccess;
-import com.isadent.users.domain.services.UserAuthenticationService;
+import com.isadent.users.domain.services.UserLoginService;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
@@ -11,11 +11,11 @@ import reactor.core.publisher.Mono;
  * This is the UserAuthentication domain service implementation
  */
 @Component
-public class UserAuthenticationServiceImpl implements UserAuthenticationService {
+public class UserLoginServiceImpl implements UserLoginService {
     private final JwtUtil jwtUtil;
     private final RepositoryUserAccess repositoryUserAccess;
 
-    public UserAuthenticationServiceImpl(JwtUtil jwtUtil, RepositoryUserAccess repositoryUserAccess) {
+    public UserLoginServiceImpl(JwtUtil jwtUtil, RepositoryUserAccess repositoryUserAccess) {
         this.jwtUtil = jwtUtil;
         this.repositoryUserAccess = repositoryUserAccess;
     }

@@ -2,7 +2,7 @@ package com.isadent.users;
 
 import com.isadent.users.domain.model.UserCredentials;
 import com.isadent.users.domain.repository.RepositorySaveUserAccess;
-import com.isadent.users.domain.services.UserAuthenticationService;
+import com.isadent.users.domain.services.UserLoginService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +13,7 @@ class UsersApplicationTests {
     @Autowired
     private RepositorySaveUserAccess saveUserAccess;
     @Autowired
-    private UserAuthenticationService authenticationService;
+    private UserLoginService authenticationService;
 
     @Test
     void contextLoads() {

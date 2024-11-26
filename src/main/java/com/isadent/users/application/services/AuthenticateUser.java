@@ -2,7 +2,7 @@ package com.isadent.users.application.services;
 
 import com.isadent.users.domain.model.UserAccess;
 import com.isadent.users.domain.model.UserCredentials;
-import com.isadent.users.domain.services.UserAuthenticationService;
+import com.isadent.users.domain.services.UserLoginService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -12,10 +12,10 @@ import reactor.core.publisher.Mono;
 @Service
 public class AuthenticateUser {
 
-    private final UserAuthenticationService authenticationService;
+    private final UserLoginService authenticationService;
 
-    public AuthenticateUser(UserAuthenticationService userAuthenticationService){
-        this.authenticationService= userAuthenticationService;
+    public AuthenticateUser(UserLoginService userLoginService){
+        this.authenticationService= userLoginService;
     }
 
     /**
